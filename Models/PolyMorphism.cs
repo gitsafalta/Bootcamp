@@ -31,6 +31,8 @@ public class LeadValidator:AbstractValidator<Lead>
     public LeadValidator()
     {
         RuleFor(x => x.FirstName).NotEmpty();
-        RuleFor(x => x.BoardId).NotEmpty();
+        RuleFor(x => x.BoardId)
+            .NotEmpty().When(x=>x.Type =="2" && (x.BoardId == "" || x.BoardId == null))
+            .WithMessage("Board Id cannot be empty");
     }
 }
