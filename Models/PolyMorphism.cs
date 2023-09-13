@@ -16,14 +16,14 @@ public class Lead:Customer {
 
 public class Customer
 {
-    public string Type { get; set; } = "";
-    public string FirstName { get; set; } ="";
-    public string BoardId { get; set; } = "";
+    public string Type { get; set; } = string.Empty;
+    public string FirstName { get; set; } = string.Empty;
+    public string BoardId { get; set; } = string.Empty;
 }
 
 public class Lead : Customer
 {
-    public new string BoardId{get; set;} = "";    
+    public new string BoardId{get; set;} = string.Empty;    
 }
 
 public class LeadValidator:AbstractValidator<Lead>
@@ -32,7 +32,7 @@ public class LeadValidator:AbstractValidator<Lead>
     {
         RuleFor(x => x.FirstName).NotEmpty();
         RuleFor(x => x.BoardId)
-            .NotEmpty().When(x=>x.Type =="2" && (x.BoardId == "" || x.BoardId == null))
+            .NotEmpty().When(x=>x.Type =="2" && string.IsNullOrEmpty(x.BoardId))
             .WithMessage("Board Id cannot be empty");
     }
 }
